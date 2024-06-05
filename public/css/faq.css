@@ -1,0 +1,150 @@
+.faq-image {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-search-bar {
+    position: absolute;
+    width: 39%;
+    margin-top: 20px;
+    margin-left: 5px;
+    box-sizing: border-box;
+    z-index: 1; 
+}
+
+.faq-search-bar input[type="text"] {
+    width: calc(100% - 100px);
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    height: 50px;
+}
+
+.faq-search-bar input[type="text"]:hover {
+    border: 0.8px solid #a13c10;
+}
+
+.faq-search-bar input[type="text"]:focus {
+    border-color: #a13c10;
+    box-shadow: 0 0 15px rgba(250, 178, 147, 0.5); 
+    outline: none;
+}
+
+.faq-search-bar button {
+    padding: 5px 10px;
+    background-color: #9dc10d;
+    color: #fff;
+    border: none;
+    padding-left: 12px;
+    padding-right: 12px;
+    height: 45px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.faq-search-bar button:hover {
+    background-color: #7d990b;
+}
+
+.faq-image img {
+    width: 100%;
+    height: auto;
+}
+
+.faq-container {
+    max-width: 950px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.faq-title-add {
+    display: flex;
+    align-items: center; 
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.faq-add-button {
+    margin-left: 10px; 
+    align-self: flex-end; 
+}
+
+.faq-title {
+    margin-left: 160px;
+    font-size: 1.4rem;
+    margin-right: 10px;
+    font-family: 'poppins-bolder';
+}
+
+.faq-section, .faq-subsection {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.faq-header, .faq-subheader {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 15px;
+    background-color: #f9f9f9;
+    justify-content: space-between;
+}
+
+.seller-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.faq-subheader {
+    background-color: #fef2f0;
+}
+
+.faq-header:hover {
+    background-color: #e9e9e9;
+}
+
+.faq-subheader:hover {
+    background-color: #ffddd6;
+}
+
+.faq-content, .faq-subcontent {
+    display: none;
+    padding: 15px;
+}
+
+.faq-edit-button {
+    margin-left: 13px;
+    text-decoration: none;
+}
+
+.faq-delete-button {
+    background-color: transparent;
+    border: none;
+    margin-left: 13px;
+}
+
+.arrow {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    margin-left: auto;
+}
+
+.collapsed .arrow {
+    transform: rotate(-90deg);
+}
+
+@font-face {
+    font-family: 'poppins-bolder';
+    src: url('../assets/fonts/Poppins-Light.ttf') format('truetype');
+}

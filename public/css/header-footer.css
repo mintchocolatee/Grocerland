@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'poppins';
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 67.5px; 
+}
+
+main {
+    min-height: 560px;
+}
+
+.main-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+    padding-top: 15px;
+}
+
+.contact-us {
+    text-align: center;
+}
+
+.contact-us h3 {
+    margin-bottom: 10px;
+}
+
+.contact-us p {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.contact-us a {
+    color: #FEA680;
+    font-size: 0.9em;
+    text-decoration: none;
+}
+
+.social-media {
+    margin-top: 23px;
+}
+
+.social-media a {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-media img {
+    width: 34px;
+    height:34px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 13px 0;
+    background-color: #222;
+    font-size: 1em;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo-container {
+    margin-right: 20px;
+    margin-left: -5px;
+    margin-bottom: -9px;
+}
+
+.logo-img {
+    width: 230px; 
+    height: auto; 
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.search-input {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 450px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-input:hover{
+    border: 0.8px solid #a13c10;
+}
+
+.search-input:focus{
+    border-color: #a13c10;
+    box-shadow: 0 0 10px rgba(250, 178, 147, 0.5); 
+    outline: none; 
+}
+
+.search-button {
+    background-color: #FEA680 ;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    width: 50px;
+    height: 35px;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-button:hover {
+    background-color: #AFDA02;
+}
+
+.main-nav ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.main-nav ul li {
+    margin-right: 20px;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-family: 'poppins';
+    font-size: 0.9em;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: #95ba00;
+}
+
+
+@font-face {
+    font-family: 'poppins';
+    src: url('../assets/fonts/Poppins-ExtraLight.ttf') format('truetype');
+}

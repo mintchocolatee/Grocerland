@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.register-page {
+    background-image: url("/assets/images/registerbackground.png"); /* Ensure the path is correct */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-container {
+    padding: 20px;
+    text-align: center;
+    width: 40%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.register-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    color: #333;
+}
+
+.register-form label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+.register-form input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.register-form button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.register-form button:hover {
+    background-color: #555;
+}

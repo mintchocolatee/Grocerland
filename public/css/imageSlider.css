@@ -1,0 +1,17 @@
+.slider {
+    width: 100%;
+    overflow: hidden;
+    margin:auto;
+    position: relative;
+}
+
+.slides {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    border: none;
+}
