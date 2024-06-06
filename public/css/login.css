@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+.login-page {
+    background-image: url("/assets/images/loginbackground.png"); /* Ensure the path is correct */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 110vh;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.login-container {
+    padding: 20px;
+    text-align: center;
+    width: 40%;
+    margin-right: 5%;
+}
+
+.login-container h1 {
+    font-size: 300%;
+    margin-bottom: 10px;
+    color: white;
+    text-align: left;
+    font-weight: 700; /* Ensure bold weight is applied */
+}
+
+.login-container p {
+    margin-bottom: 20px;
+    text-align: left;
+    color: white;
+}
+
+.login-container a {
+    color: white;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.login-form label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bolder;
+}
+
+.login-form input {
+    padding: 13px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    color: #f9a174;
+    font-weight: 600;
+}
+
+.login-form input:focus {
+    border: none;
+    outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:qwfocus {
+    border: none;
+    -webkit-text-fill-color: #afda02;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.forgot-password {
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+.login-form button {
+    padding: 10px;
+    background-color: white;
+    color: #f9a174;
+    border: none;
+    border-radius: 50px;
+    font-weight: 900;
+    cursor: pointer;
+    width: 100px;
+    align-self: center; /* Center the button */
+}
+
+.login-form button:hover {
+    color: #afda02;
+}
