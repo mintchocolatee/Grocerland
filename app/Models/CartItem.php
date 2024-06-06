@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model
 {
-    use HasFactory;
 
+    use HasFactory;
     protected $fillable = ['user_id', 'product_id', 'quantity'];
 
     public function user()
@@ -19,5 +19,11 @@ class CartItem extends Model
     public function product()
     {
         return $this->belongsTo(Product::class);
+    }
+
+    // Calculate total price based on quantity and product price
+    public function getTotalPriceAttribute()
+    {
+        return $this->quantity * $this->product->price;
     }
 }

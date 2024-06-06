@@ -2,13 +2,15 @@
     padding: 20px;
 }
 
-.cart-items {
+.cart-items,
+.checkout-items {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.cart-item {
+.cart-item,
+.checkout-item {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -16,16 +18,19 @@
     padding: 10px 0;
 }
 
-.cart-item img {
+.cart-item img,
+.checkout-item img {
     width: 100px;
     height: auto;
 }
 
-.cart-item-details {
+.cart-item-details,
+.checkout-item-details {
     flex: 1;
 }
 
-.cart-item-details h2 {
+.cart-item-details h2,
+.checkout-item-details h2 {
     margin: 0;
 }
 
@@ -39,7 +44,8 @@
     width: 50px;
 }
 
-.delete-button {
+.delete-button,
+.checkout-button {
     background-color: red;
     color: white;
     border: none;
@@ -49,6 +55,19 @@
 
 .delete-button:hover {
     background-color: darkred;
+}
+
+.checkout-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: darkgreen;
 }
 
 .alert {
@@ -68,4 +87,52 @@
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
+}
+
+/* Add to your existing CSS file */
+
+.checkout-page,
+.checkout-success-page,
+.checkout-cancel-page {
+    padding: 20px;
+}
+
+.checkout-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.checkout-item img {
+    width: 100px;
+    height: auto;
+}
+
+.checkout-item-details {
+    flex: 1;
+}
+
+.checkout-item-details h2 {
+    margin: 0;
+}
+
+.checkout-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.checkout-button:hover {
+    background-color: darkgreen;
 }

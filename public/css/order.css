@@ -1,0 +1,19 @@
+/* public/css/order.css */
+.order {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.order h2 {
+    margin-top: 0;
+}
+
+.order ul {
+    list-style: none;
+    padding: 0;
+}
+
+.order li {
+    margin-bottom: 10px;
+}

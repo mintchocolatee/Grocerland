@@ -3,6 +3,8 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,16 @@ Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
 Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+// Order routes
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::post('/orders/reorder/{orderId}', [OrderController::class, 'reorder'])->name('orders.reorder');
+
+// Checkout CRUD routes
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 // FAQ CRUD routes
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');

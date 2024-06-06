@@ -11,12 +11,17 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     public function index()
-    {
-        $userId = Auth::id();
-        $cartItems = CartItem::where('user_id', $userId)->with('product')->get();
+{
+    $userId = Auth::id();
+    $cartItems = CartItem::where('user_id', $userId)->with('product')->get();
+    // $cartItems->load('product:image_path,id');
+    // dd($cartItems);
 
-        return view('pages.cart', compact('cartItems'));
-    }
+    return view('pages.cart', compact('cartItems'));
+}
+
+
+    
 
     public function add(Request $request, $id)
     {
