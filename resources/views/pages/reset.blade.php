@@ -19,4 +19,20 @@
             </form>
         </div>
     </div>
+
+    @if (Session::has('success_message'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Success!</h2>
+                <p>{{ Session::get('success_message') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @endif
+
+    <script>
+        document.getElementById('close-btn').onclick = function() {
+            window.location.href = "{{ route('user.login') }}";
+        };
+    </script>
 @endsection

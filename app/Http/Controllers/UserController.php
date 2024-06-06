@@ -49,20 +49,21 @@ class UserController extends Controller
 
         // // Store a message in the session
         // Session::flash('verification_message', 'We have emailed your verification link!');
+        Session::flash('success_message', 'Your account has been register successfully.');
 
         // Redirect to login page
-        return redirect()->route('user.login');
+        return redirect()->route('user.register');
     }
 
-    public function verifyEmail($token)
-    {
-        $user = User::where('email_verification_token', $token)->firstOrFail();
-        $user->email_verified_at = now();
-        $user->email_verification_token = null;
-        $user->save();
+    // public function verifyEmail($token)
+    // {
+    //     $user = User::where('email_verification_token', $token)->firstOrFail();
+    //     $user->email_verified_at = now();
+    //     $user->email_verification_token = null;
+    //     $user->save();
 
-        return redirect()->route('user.login')->with('status', 'Your email has been verified!');
-    }
+    //     return redirect()->route('user.login')->with('status', 'Your email has been verified!');
+    // }
 
     public function handleLogin(Request $request)
     {
@@ -88,26 +89,27 @@ class UserController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->firstOrFail();
-        $user->password_reset_token = Str::random(60);
-        $user->save();
-
-        Mail::send('pages.email.reset', ['token' => $user->password_reset_token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Reset Password Notification');
-        });
-
-        return redirect()->route('user.login')->with('status', 'We have emailed your password reset link!');
-    }
-
-    public function verifyResetPassword($token)
-    {
-        $user = User::where('password_reset_token', $token)->firstOrFail();
-        $user->password_reset_token = null;
         $user->password = Hash::make(request('password'));
         $user->save();
 
-        return redirect()->route('user.login')->with('status', 'Your password has been reset!');
+        // Mail::send('pages.email.reset', ['token' => $user->password_reset_token], function ($message) use ($request) {
+        //     $message->to($request->email);
+        //     $message->subject('Reset Password Notification');
+        // });
+        Session::flash('success_message', 'Your password has been reset successfully.');
+
+        return redirect()->route('user.resetPassword');
     }
+
+    // public function verifyResetPassword($token)
+    // {
+    //     $user = User::where('password_reset_token', $token)->firstOrFail();
+    //     $user->password_reset_token = null;
+    //     $user->password = Hash::make(request('password'));
+    //     $user->save();
+
+    //     return redirect()->route('user.login')->with('status', 'Your password has been reset!');
+    // }
 
     public function logout()
     {

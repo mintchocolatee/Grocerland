@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 </head>
 
 <body>
@@ -37,7 +38,8 @@
                 <li><a href="{{ route('products.index') }}"
                         class="{{ Request::routeIs('products.index') ? 'active' : '' }}">Home</a></li>
                 {{-- seller no cart page --}}
-                <li><a href="../pages/cart.php">Cart</a></li>
+                <li><a href="{{ route('cart.index') }}"
+                        class="{{ Request::routeIs('cart.index') ? 'active' : '' }}">Cart</a></li>
                 <li><a href="../pages/cart.php">Order</a></li>
                 <li><a href="{{ route('faq.index') }}"
                         class="{{ Request::routeIs('faq.index') ? 'active' : '' }}">FAQ</a></li>

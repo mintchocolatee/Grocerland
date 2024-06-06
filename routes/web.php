@@ -28,7 +28,10 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('pr
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Cart CRUD routes
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 
 // FAQ CRUD routes
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');

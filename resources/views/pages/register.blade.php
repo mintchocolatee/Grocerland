@@ -23,31 +23,18 @@
         </div>
     </div>
 
-    <!-- Popup message modal -->
-    <div id="popup-message" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>{{ Session::get('verification_message') }}</p>
+    @if (Session::has('success_message'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Success!</h2>
+                <p>{{ Session::get('success_message') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
         </div>
-    </div>
+    @endif
 
     <script>
-        // Get the modal
-        var modal = document.getElementById('popup-message');
-
-        // Get the close button
-        var closeBtn = document.getElementsByClassName('close')[0];
-
-        // When the page loads, check if the message is present and show the modal
-        window.onload = function() {
-            if ("{{ Session::has('verification_message') }}") {
-                modal.style.display = 'block';
-            }
-        };
-
-        // When the user clicks on the close button, hide the modal
-        closeBtn.onclick = function() {
-            modal.style.display = 'none';
+        document.getElementById('close-btn').onclick = function() {
             window.location.href = "{{ route('user.login') }}";
         };
     </script>

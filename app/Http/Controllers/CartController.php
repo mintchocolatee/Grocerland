@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        $userId = Auth::id();
+        $cartItems = CartItem::where('user_id', $userId)->with('product')->get();
+
+        return view('pages.cart', compact('cartItems'));
+    }
+
     public function add(Request $request, $id)
     {
         $product = Product::findOrFail($id);
@@ -40,59 +48,32 @@ class CartController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Product added to cart.');
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function update(Request $request, $id)
     {
-        //
+        $cartItem = CartItem::findOrFail($id);
+
+        if ($request->quantity < 1) {
+            return redirect()->route('cart.index')->with('error', 'Quantity must be at least 1.');
+        }
+
+        $product = Product::findOrFail($cartItem->product_id);
+
+        if ($request->quantity > $product->stock) {
+            return redirect()->route('cart.index')->with('error', 'Quantity exceeds available stock.');
+        }
+
+        $cartItem->quantity = $request->quantity;
+        $cartItem->save();
+
+        return redirect()->route('cart.index')->with('success', 'Cart updated successfully.');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
+        $cartItem = CartItem::findOrFail($id);
+        $cartItem->delete();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('cart.index')->with('success', 'Item removed from cart.');
     }
 }
