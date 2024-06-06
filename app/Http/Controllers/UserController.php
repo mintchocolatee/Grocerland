@@ -108,4 +108,10 @@ class UserController extends Controller
 
         return redirect()->route('user.login')->with('status', 'Your password has been reset!');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('user.login');
+    }
 }

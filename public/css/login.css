@@ -85,7 +85,7 @@ input:-webkit-autofill:qwfocus {
     margin-bottom: 20px;
 }
 
-.login-form button {
+.login-form button,.logout-button{
     padding: 10px;
     background-color: white;
     color: #f9a174;
@@ -97,6 +97,11 @@ input:-webkit-autofill:qwfocus {
     align-self: center; /* Center the button */
 }
 
-.login-form button:hover {
+.logout-button {
+    margin-left: -360px;
+    margin-top: 10px;
+}
+
+.login-form button:hover,.logout-button:hover {
     color: #afda02;
 }

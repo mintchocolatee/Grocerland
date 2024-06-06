@@ -15,6 +15,7 @@ Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail'])->nam
 Route::get('/reset-password', [UserController::class, 'resetPassword'])->name('user.resetPassword');
 Route::post('/reset-password', [UserController::class, 'handleResetPassword'])->name('user.handleResetPassword');
 Route::get('/reset-password/{token}', [UserController::class, 'verifyResetPassword'])->name('user.verifyResetPassword');
+Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 // Product CRUD routes
 Route::get('/', [ProductController::class, 'index'])->name('products.index');

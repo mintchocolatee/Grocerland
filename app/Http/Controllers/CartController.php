@@ -16,16 +16,29 @@ class CartController extends Controller
         $userId = Auth::id();
         $quantity = $request->input('quantity');
 
-        if ($quantity > $product->stock) {
-            return redirect()->route('products.show', $id)->with('error', 'Not enough stock available.');
+        // Retrieve cart items for the user
+        $cartItems = CartItem::where('user_id', $userId)
+            ->where('product_id', $id)
+            ->get();
+
+        // Calculate total quantity in the cart
+        $totalQuantityInCart = $quantity; // Start with the new quantity being added
+        foreach ($cartItems as $cartItem) {
+            $totalQuantityInCart += $cartItem->quantity;
+        }
+        
+        // Check if total quantity exceeds available stock
+        if ($totalQuantityInCart > $product->stock) {
+            return redirect()->route('products.index')->with('error', 'Total quantity in cart exceeds available stock. You can add ' .(($product->stock)-($totalQuantityInCart-$quantity)). ' more');
         }
 
+        // Update or create cart item
         $cartItem = CartItem::updateOrCreate(
             ['user_id' => $userId, 'product_id' => $id],
             ['quantity' => DB::raw('quantity + ' . $quantity)]
         );
 
-        return redirect()->route('products.show', $id)->with('success', 'Product added to cart!');
+        return redirect()->route('products.index')->with('success', 'Product added to cart.');
     }
     /**
      * Display a listing of the resource.

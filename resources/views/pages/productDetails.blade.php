@@ -25,7 +25,7 @@
             <p class="product-details-description"><strong>Description:</strong> {{ $product->description }}</p>
             <p class="product-details-price"><strong>Price:</strong> RM{{ $product->price }}</p>
             <p class="product-details-stock"><strong>Stock:</strong> {{ $product->stock }}</p>
-            <form id="product-details-add-to-cart-form" action="{{ route('cart.add', $product->id) }}" method="POST">
+            <form id="add-to-cart-form" action="{{ route('cart.add', $product->id) }}" method="POST" data-product-id="{{ $product->id }}" data-product-stock="{{ $product->stock }}">
                 @csrf
                 <div class="form-group">
                     <label for="quantity">Quantity:</label>
@@ -35,13 +35,36 @@
             </form>
         </div>
     <script>
-        document.getElementById('add-to-cart-form').addEventListener('submit', function(event) {
-            const quantity = parseInt(document.getElementById('quantity').value);
-            const stock = {{ $product->stock }};
-            if (quantity > stock) {
-                alert('Not enough stock available.');
-                event.preventDefault();
-            }
+        document.querySelectorAll('.add-to-cart-form').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                
+                const productId = this.dataset.productId; 
+                const stock = parseInt(this.dataset.productStock); 
+                const quantity = parseInt(this.querySelector('#quantity').value);
+                
+                if (quantity > stock) {
+                    alert('Not enough stock available.');
+                } else {
+                    this.submit();
+                }
+            });
         });
+
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Check if user is logged in
+                if (!isLoggedIn()) {
+                    event.preventDefault(); // Prevent default action (e.g., form submission)
+                    alert('Please login to add items to your cart.');
+                    window.location.href = '{{ route("user.login") }}'; 
+                }
+            });
+        });
+
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return {{ auth()->check() ? 'true' : 'false' }};
+        }
     </script>
 @endsection

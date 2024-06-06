@@ -21,12 +21,13 @@
         <div class="product-container">
             <div class="title-button-container">
                 <h1>Product List</h1>
-                {{-- only admin --}}
-                <button class="add-product-button">
-                    <a href="{{ route('products.create') }}" class="btn btn-success">
-                        <img width="40" height="40" src="https://img.icons8.com/?size=100&id=Xb6BIWuGB9xH&format=png&color=000000" alt="add"/>
-                    </a>
-                </button>
+                @if(auth()->user() && auth()->user()->role === 'admin')
+                    <button class="add-product-button">
+                        <a href="{{ route('products.create') }}" class="btn btn-success">
+                            <img width="40" height="40" src="https://img.icons8.com/?size=100&id=Xb6BIWuGB9xH&format=png&color=000000" alt="add"/>
+                        </a>
+                    </button>
+                @endif
             </div>
             <form action="{{ route('products.index') }}" method="GET" class="sort-filter-form">
                 <label for="sortBy">Sort By:</label>
@@ -57,23 +58,25 @@
                                 <a href="{{ route('products.show', $product->id) }}" class="card-title">{{ $product->name }}</a>
                                 <p class="card-price">RM {{ $product->price }}</p>
 
-                                {{-- only user --}}
-                                {{-- <form id="add-to-cart-form" action="{{ route('cart.add', $product->id) }}" method="POST" data-product-id="{{ $product->id }}" data-product-stock="{{ $product->stock }}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="quantity">Quantity:</label>
-                                        <input type="number" id="quantity" name="quantity" min="1" max="{{ $product->stock }}" required>
-                                    </div>
-                                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
-                                </form> --}}
-                                
-                                {{-- only admin --}}
-                                <a href="{{ route('products.edit', $product->id) }}" class="edit-button">Edit product</a>
-                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
-                                </form>
+                                @if((auth()->check() && auth()->user()->role !== 'admin')|| !auth()->check())
+                                    <form id="add-to-cart-form" action="{{ route('cart.add', $product->id) }}" method="POST" data-product-id="{{ $product->id }}" data-product-stock="{{ $product->stock }}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="quantity">Quantity:</label>
+                                            <input type="number" id="quantity" name="quantity" min="1" max="{{ $product->stock }}" required>
+                                        </div>
+                                        <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                                    </form>
+                                @endif
+
+                                @if(auth()->user() && auth()->user()->role === 'admin')
+                                    <a href="{{ route('products.edit', $product->id) }}" class="edit-button">Edit product</a>
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -104,21 +107,45 @@
         </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            @if(session('success'))
+                alert("{{ session('success') }}");
+            @endif
+            @if(session('error'))
+                alert("{{ session('error') }}");
+            @endif
+        });
+
         document.querySelectorAll('.add-to-cart-form').forEach(form => {
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission for now
+                event.preventDefault(); 
                 
-                const productId = this.dataset.productId; // Get the product ID from data attribute
-                const stock = parseInt(this.dataset.productStock); // Get the product's stock from data attribute
-                const quantity = parseInt(this.querySelector('#quantity').value); // Get the quantity entered by the user
+                const productId = this.dataset.productId; 
+                const stock = parseInt(this.dataset.productStock); 
+                const quantity = parseInt(this.querySelector('#quantity').value);
                 
                 if (quantity > stock) {
                     alert('Not enough stock available.');
                 } else {
-                    // Proceed with form submission if stock is sufficient
                     this.submit();
                 }
             });
         });
+
+        document.querySelectorAll('.add-to-cart-button').forEach(button => {
+            button.addEventListener('click', function(event) {
+                // Check if user is logged in
+                if (!isLoggedIn()) {
+                    event.preventDefault(); // Prevent default action (e.g., form submission)
+                    alert('Please login to add items to your cart.');
+                    window.location.href = '{{ route("user.login") }}'; 
+                }
+            });
+        });
+
+        // Function to check if user is logged in
+        function isLoggedIn() {
+            return {{ auth()->check() ? 'true' : 'false' }};
+        }
     </script>
 @endsection
