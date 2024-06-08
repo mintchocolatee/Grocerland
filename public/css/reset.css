@@ -100,7 +100,7 @@ input:-webkit-autofill:qwfocus {
 .modal-content {
     background: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     text-align: center;
 }
 
@@ -109,15 +109,17 @@ input:-webkit-autofill:qwfocus {
 }
 
 .modal-content button {
+    font-size: 17px;
     margin-top: 10px;
     padding: 5px 10px;
-    background: #007bff;
+    background: #afda02;
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 50px;
     cursor: pointer;
 }
 
 .modal-content button:hover {
-    background: #0056b3;
+    background: white;
+    color: #afda02;
 }
