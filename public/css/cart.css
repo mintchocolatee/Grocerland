@@ -5,8 +5,8 @@
 
 .cart-title {
     font-size: 300%;
-    font-weight: 950;
     text-align: center;
+    font-family: 'poppins-bolder';
 }
 
 .cart-item {
@@ -157,4 +157,9 @@
 .checkout-cart:hover {
     color: #afda02;
     background-color: #f2f6da;
+}
+
+@font-face {
+    font-family: 'poppins-bolder';
+    src: url('../assets/fonts/Poppins-Light.ttf') format('truetype');
 }

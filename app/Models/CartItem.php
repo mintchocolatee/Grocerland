@@ -20,6 +20,7 @@ class CartItem extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    
 
     // Calculate total price based on quantity and product price
     public function getTotalPriceAttribute()

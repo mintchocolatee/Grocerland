@@ -39,7 +39,7 @@
             <ul>
                 <li><a href="{{ route('products.index') }}"
                         class="{{ Request::routeIs('products.index') ? 'active' : '' }}">Home</a></li>
-                @if(auth()->user() && auth()->user()->role === 'user')
+                @if(auth()->user() && auth()->user()->role == 'user' || !auth()->check())
                     <li><a href="{{ route('cart.index') }}"
                             class="{{ Request::routeIs('cart.index') ? 'active' : '' }}">Cart</a></li>
                 @endif
