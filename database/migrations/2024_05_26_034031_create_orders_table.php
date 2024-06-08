@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->decimal('total_amount', 10, 2);
+            $table->string('deliver_to')->nullable();
+            $table->string('receiver')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('payment_method')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
