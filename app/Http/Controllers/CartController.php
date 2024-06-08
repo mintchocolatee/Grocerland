@@ -27,6 +27,11 @@ class CartController extends Controller
 
     public function add(Request $request, $id)
     {
+        // Check if the user is authenticated
+        if (!Auth::check()) {
+            return redirect()->route('user.login')->with('error', 'You must log in before adding items to the cart.');
+        }
+
         $product = Product::findOrFail($id);
         $userId = Auth::id();
         $quantity = $request->input('quantity');
