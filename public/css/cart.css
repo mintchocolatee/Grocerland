@@ -1,138 +1,160 @@
-.cart-page {
-    padding: 20px;
+.container {
+    padding: 40px;
+    padding-top: 20px;
 }
 
-.cart-items,
-.checkout-items {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+.cart-title {
+    font-size: 300%;
+    font-weight: 950;
+    text-align: center;
 }
 
-.cart-item,
-.checkout-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-
-.cart-item img,
-.checkout-item img {
-    width: 100px;
-    height: auto;
-}
-
-.cart-item-details,
-.checkout-item-details {
-    flex: 1;
-}
-
-.cart-item-details h2,
-.checkout-item-details h2 {
-    margin: 0;
-}
-
-.cart-item-details form {
+.cart-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
 }
 
-.cart-item-details input {
-    width: 50px;
+.cart-item img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 10px;
+    margin-left: 10px;
 }
 
-.delete-button,
-.checkout-button {
-    background-color: red;
+/* Custom styles for the circular checkbox */
+.cart-checkbox {
+    appearance: none; /* Remove default checkbox style */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Make it circular */
+    background-color: #dcef98; /* Set the color to grey */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.cart-checkbox:checked {
+    background-color: #afda02; /* Change the color when checked */
+}
+
+.cart-checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.product-details h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #afda02;
+}
+
+.quantity-controls button:hover {
+    color: #afda02;
+    background-color: #f2f6da;
+}
+
+.quantity-controls input {
+    font-size: 15px;
+    font-weight: bold;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+    margin: 0 10px;
+    border: 1px solid #afda02;
+    border-radius: 10px;
+    color: #afda02;
+}
+
+.quantity-controls input:focus {
+    outline: none;
+}
+
+.price {
+    margin-top: 10px;
+    font-weight: 999;
+}
+
+.remove-item {
+    background-color: #f9a174;
+    font-weight: bold;
+    font-size: 15px;
+    height: 30px;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 5px 10px;
     cursor: pointer;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 
-.delete-button:hover {
-    background-color: darkred;
+.remove-item:hover {
+    background-color: #fde2d6;
+    color: #f9a174;
 }
 
-.checkout-button {
-    background-color: green;
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+.total-amount {
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 20px;
-}
-
-.checkout-button:hover {
-    background-color: darkgreen;
-}
-
-.alert {
-    padding: 15px;
     margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
+    text-align: right;
+    margin-right: 10px;
 }
 
-.alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
-
-.alert-danger {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}
-
-/* Add to your existing CSS file */
-
-.checkout-page,
-.checkout-success-page,
-.checkout-cancel-page {
-    padding: 20px;
-}
-
-.checkout-items {
+.checkout-cart-container {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    justify-content: right;
 }
 
-.checkout-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-
-.checkout-item img {
-    width: 100px;
-    height: auto;
-}
-
-.checkout-item-details {
-    flex: 1;
-}
-
-.checkout-item-details h2 {
-    margin: 0;
-}
-
-.checkout-button {
-    background-color: green;
+.checkout-cart {
+    background-color: #afda02;
+    font-weight: bold;
+    font-size: 20px;
+    height: 40px;
+    width: 150px;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 5px 10px;
     cursor: pointer;
-    margin-top: 20px;
+    border-radius: 10px;
+    margin-right: 10px;
 }
 
-.checkout-button:hover {
-    background-color: darkgreen;
+.checkout-cart:hover {
+    color: #afda02;
+    background-color: #f2f6da;
 }

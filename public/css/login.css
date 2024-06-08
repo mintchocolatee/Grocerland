@@ -4,7 +4,7 @@ body {
 }
 
 .login-page {
-    background-image: url("/assets/images/loginbackground.png"); /* Ensure the path is correct */
+    background-image: url("/assets/images/loginbackground2.png"); /* Ensure the path is correct */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,7 +60,7 @@ body {
 .login-form input {
     padding: 13px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 50px;
     color: #f9a174;
     font-weight: 600;
@@ -85,7 +85,8 @@ input:-webkit-autofill:qwfocus {
     margin-bottom: 20px;
 }
 
-.login-form button,.logout-button{
+.login-form button,
+.logout-button {
     padding: 10px;
     background-color: white;
     color: #f9a174;
@@ -98,10 +99,11 @@ input:-webkit-autofill:qwfocus {
 }
 
 .logout-button {
-    margin-left: -360px;
+    margin-left: -80%;
     margin-top: 10px;
 }
 
-.login-form button:hover,.logout-button:hover {
+.login-form button:hover,
+.logout-button:hover {
     color: #afda02;
 }

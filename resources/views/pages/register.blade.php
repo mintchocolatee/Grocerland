@@ -3,7 +3,7 @@
 @section('content')
     <div class="register-page">
         <div class="register-container">
-            <h1>Register</h1>
+            <h1>Sign Up</h1>
             <form class="register-form" action="{{ route('user.handleRegister') }}" method="POST">
                 @csrf
                 <label for="name">Name</label>

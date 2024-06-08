@@ -1,30 +1,45 @@
-<!-- resources/views/pages/order.blade.php -->
 @extends('components.layout')
 
 @section('content')
     <div class="container">
-        <h1>Order History</h1>
+        <h1 class="order-title">Order History</h1>
         @if ($orders->isEmpty())
             <p>You have no orders.</p>
         @else
             @foreach ($orders as $order)
                 <div class="order">
-                    <h2>Order #{{ $order->id }}</h2>
-                    <p>Placed on: {{ $order->created_at }}</p>
-                    <p>Total Amount: ${{ $order->total_amount }}</p>
-                    <p>Status: {{ $order->status ?? 'Pending' }}</p>
-                    <h3>Products:</h3>
-                    <ul>
-                        @foreach ($order->products as $product)
-                            <li>
-                                {{ $product->name }} - {{ $product->pivot->quantity }} x ${{ $product->pivot->price }}
-                            </li>
-                        @endforeach
-                    </ul>
-                    <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Reorder</button>
-                    </form>
+                    <h2>Order</h2>
+                    <p class="place-p">Placed on: {{ $order->created_at }}</p>
+                    <p class="pay-p">Payment Method: {{ $order->payment_method }}</p>
+                    <div class="order-details">
+                        <div class="delivery-details">
+                            <h3>Delivery Details</h3>
+                            <p>Address: {{ $order->deliver_to }}</p>
+                            <p>Receiver: {{ $order->receiver }}</p>
+                            <p>Phone Number: {{ $order->phone_number }}</p>
+                        </div>
+                        <div class="productbuy-details">
+                            <h3>Products</h3>
+                            <ul>
+                                @foreach ($order->products as $product)
+                                    <li>
+                                        {{ $product->name }} - {{ $product->pivot->quantity }} x
+                                        ${{ $product->pivot->price }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="other-details">
+                            <h3>Total Amount : </h3>
+                            <h4>${{ $order->total_amount }}</h4>
+                            <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
+                                @csrf
+                                <div class="button-details">
+                                    <button type="submit" class="reorder-button">Reorder</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             @endforeach
         @endif

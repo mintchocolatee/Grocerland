@@ -1,0 +1,198 @@
+.checkout-page {
+    margin: 40px;
+    margin-top: 10px;
+}
+
+.check-title {
+    font-size: 300%;
+    font-weight: 950;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.delivery-title {
+    margin-top: 20px;
+}
+
+.delivery-container {
+    margin-top: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.checkout-form-group {
+    margin-bottom: 20px;
+}
+
+.checkout-form-group label {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.checkout-form-group input {
+    height: 30px;
+    width: 1000px;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding-left: 10px;
+    color: #afda02;
+}
+
+.checkout-form-group input::placeholder {
+    color: #ddd;
+}
+
+.checkout-form-group input:focus {
+    outline: none;
+    border: 1px solid transparent; /* Ensure no border appears */
+}
+
+.checkout-form-group select {
+    color: #afda02;
+    background-color: #f2f6da;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+    cursor: pointer;
+
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, #f2f6da 50%),
+        linear-gradient(135deg, #f2f6da 50%, transparent 50%),
+        radial-gradient(#afda02 70%, transparent 72%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+        calc(100% - 15px) calc(1em + 2px), calc(100% - 0.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+}
+
+.checkout-form-group select:focus {
+    background-image: linear-gradient(45deg, #fde2d6 50%, transparent 50%),
+        linear-gradient(135deg, transparent 50%, #fde2d6 50%),
+        radial-gradient(#f9a174 70%, transparent 72%);
+    background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
+        calc(100% - 0.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+    background-repeat: no-repeat;
+    border-color: #f9a174;
+    outline: 0;
+}
+
+.checkout-form-group select option {
+    color: #afda02;
+    background-color: white;
+    padding: 10px; /* Add padding */
+    font-size: 16px; /* Change font size */
+    font-weight: normal; /* Change font weight */
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Autofill styles */
+.checkout-form-group input:-webkit-autofill,
+.checkout-form-group input:-webkit-autofill:hover,
+.checkout-form-group input:-webkit-autofill:focus,
+.checkout-form-group input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fea680 !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.checkout-container {
+    margin-top: 20px;
+}
+
+.checkout-title {
+    margin-bottom: 20px;
+}
+
+.checkout-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.checkout-page,
+.checkout-success-page,
+.checkout-cancel-page {
+    padding: 20px;
+}
+
+.checkout-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.checkout-item img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.checkout-item-details {
+    flex: 1;
+    margin-bottom: 15px;
+}
+
+.checkout-item-details h2 {
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.checkout-item-details p {
+    font-weight: bold;
+    font-size: 16px;
+    color: #5e5e5e;
+}
+
+.total-price {
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.pay-button-container {
+    display: flex;
+    justify-content: right;
+}
+
+.checkout-button {
+    background-color: #afda02;
+    font-weight: bold;
+    font-size: 20px;
+    height: 40px;
+    width: 200px;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.checkout-button:hover {
+    color: #afda02;
+    background-color: #f2f6da;
+}

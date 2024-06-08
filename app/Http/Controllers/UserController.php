@@ -14,7 +14,9 @@ class UserController extends Controller
 {
     public function login()
     {
-        return view('pages.login');
+        // Pass the authenticated user's name to the view if available
+        $userName = Auth::check() ? Auth::user()->name : null;
+        return view('pages.login', compact('userName'));
     }
 
     public function register()

@@ -3,9 +3,9 @@
 @section('content')
     <div class="login-page">
         <div class="login-container">
-            @if(auth()->check()) 
+            @if (auth()->check())
                 <h1>Logged In</h1>
-                <p>You are already logged in.</p>
+                <p>Welcome , {{ auth()->user()->name }} ! You are already logged in.</p>
                 <form id="logout-form" action="{{ route('user.logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="logout-button">Logout</button>

@@ -7,22 +7,25 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\CartItem;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index()
-    {
-        $user = Auth::user();
-
-        if ($user->role === 'admin') {
-            $orders = Order::with('user', 'products')->get();
-        } else {
-            $orders = Order::where('user_id', $user->id)->with('products')->get();
-        }
-
-        return view('pages.order', compact('orders'));
+{
+    $user = Auth::user();
+    if(!$user){
+        return redirect()->route('user.login');
+    }else if ($user->role === 'admin') {
+        $orders = Order::with('user', 'products')->latest()->get();
+    } else {
+        $orders = Order::where('user_id', $user->id)->with('products')->latest()->get();
     }
+
+    return view('pages.order', compact('orders'));
+}
+
 
     public function reorder($orderId)
     {

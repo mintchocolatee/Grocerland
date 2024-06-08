@@ -9,7 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'total_amount'];
+    protected $fillable = [
+        'user_id', 
+        'total_amount', 
+        'deliver_to', 
+        'receiver', 
+        'phone_number', 
+        'payment_method'
+    ];
 
     public function user()
     {
@@ -23,3 +30,4 @@ class Order extends Model
                     ->withTimestamps();
     }
 }
+
