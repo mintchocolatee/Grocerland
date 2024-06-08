@@ -28,4 +28,26 @@
             @endif
         </div>
     </div>
+    @if (session('success'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Success!</h2>
+                <p>{{ Session::get('success') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @elseif (session('error'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Fail to add!</h2>
+                <p>{{ Session::get('error') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @endif
+    <script>
+        document.getElementById('close-btn').onclick = function() {
+            window.location.href = "{{ route('user.login') }}";
+        };
+    </script>
 @endsection
