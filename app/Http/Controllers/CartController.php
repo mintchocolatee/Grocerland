@@ -36,7 +36,7 @@ class CartController extends Controller
             ['quantity' => DB::raw('quantity + ' . $quantity)]
         );
 
-        return redirect()->route('cart.index')->with('success', 'Product added to cart.');
+        return redirect()->route('products.index')->with('success', 'Product added to cart.');
     }
 
     public function update(Request $request, $id)

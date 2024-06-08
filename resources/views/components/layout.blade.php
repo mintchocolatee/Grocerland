@@ -39,9 +39,10 @@
             <ul>
                 <li><a href="{{ route('products.index') }}"
                         class="{{ Request::routeIs('products.index') ? 'active' : '' }}">Home</a></li>
-                {{-- seller no cart page --}}
-                <li><a href="{{ route('cart.index') }}"
-                        class="{{ Request::routeIs('cart.index') ? 'active' : '' }}">Cart</a></li>
+                @if(auth()->user() && auth()->user()->role === 'user')
+                    <li><a href="{{ route('cart.index') }}"
+                            class="{{ Request::routeIs('cart.index') ? 'active' : '' }}">Cart</a></li>
+                @endif
                 <li><a href="{{ route('orders.index') }}"
                         class="{{ Request::routeIs('orders.index') ? 'active' : '' }}">Order</a></li>
                 <li><a href="{{ route('faq.index') }}"

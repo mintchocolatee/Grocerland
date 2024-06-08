@@ -32,12 +32,14 @@
                         <div class="other-details">
                             <h3>Total Amount : </h3>
                             <h4>${{ $order->total_amount }}</h4>
-                            <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
-                                @csrf
-                                <div class="button-details">
-                                    <button type="submit" class="reorder-button">Reorder</button>
-                                </div>
-                            </form>
+                            @if(auth()->user() && auth()->user()->role === 'user')
+                                <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
+                                    @csrf
+                                    <div class="button-details">
+                                        <button type="submit" class="reorder-button">Reorder</button>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

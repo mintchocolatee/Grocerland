@@ -3,32 +3,36 @@
 @section('content')
     <div class="container">
         <h1 class="cart-title">My Cart</h1>
-        <div class="cart-items">
-            @foreach ($cartItems as $cartItem)
-                <div class="cart-item" data-cart-item-id="{{ $cartItem->id }}" data-price="{{ $cartItem->product->price }}">
-                    <input class="cart-checkbox" type="checkbox" name="selected_items[]" value="{{ $cartItem->id }}"
-                        onchange="updateTotalAmount()">
-                    <img src="{{ asset('storage/' . $cartItem->product->image_path) }}"
-                        alt="{{ $cartItem->product->name }}">
-                    <div class="product-details">
-                        <h2>{{ $cartItem->product->name }}</h2>
-                        <div class="quantity-controls">
-                            <button class="decrease" onclick="updateQuantity({{ $cartItem->id }}, -1)">-</button>
-                            <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" readonly>
-                            <button class="increase" onclick="updateQuantity({{ $cartItem->id }}, 1)">+</button>
+        @if ($cartItems->count() > 0)
+            <div class="cart-items">
+                @foreach ($cartItems as $cartItem)
+                    <div class="cart-item" data-cart-item-id="{{ $cartItem->id }}" data-price="{{ $cartItem->product->price }}">
+                        <input class="cart-checkbox" type="checkbox" name="selected_items[]" value="{{ $cartItem->id }}"
+                            onchange="updateTotalAmount()">
+                        <img src="{{ asset('storage/' . $cartItem->product->image_path) }}"
+                            alt="{{ $cartItem->product->name }}">
+                        <div class="product-details">
+                            <h2>{{ $cartItem->product->name }}</h2>
+                            <div class="quantity-controls">
+                                <button class="decrease" onclick="updateQuantity({{ $cartItem->id }}, -1)">-</button>
+                                <input type="number" name="quantity" value="{{ $cartItem->quantity }}" min="1" readonly>
+                                <button class="increase" onclick="updateQuantity({{ $cartItem->id }}, 1)">+</button>
+                            </div>
+                            <p class="price">RM {{ $cartItem->product->price }}</p>
                         </div>
-                        <p class="price">RM {{ $cartItem->product->price }}</p>
+                        <button class="remove-item" onclick="removeItem({{ $cartItem->id }})">Remove</button>
                     </div>
-                    <button class="remove-item" onclick="removeItem({{ $cartItem->id }})">Remove</button>
-                </div>
-            @endforeach
-        </div>
-        <div class="total-amount">
-            Total Amount: RM <span id="total-amount">0.00</span>
-        </div>
-        <div class="checkout-cart-container">
-            <button class="checkout-cart" onclick="proceedToCheckout()">Checkout</button>
-        </div>
+                @endforeach
+            </div>
+            <div class="total-amount">
+                Total Amount: RM <span id="total-amount">0.00</span>
+            </div>
+            <div class="checkout-cart-container">
+                <button class="checkout-cart" onclick="proceedToCheckout()">Checkout</button>
+            </div>
+        @else
+            <p>Your cart is empty.</p>
+        @endif
     </div>
 
     <script>

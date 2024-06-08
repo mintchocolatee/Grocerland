@@ -41,8 +41,8 @@ class OrderController extends Controller
                 return redirect()->route('orders.index')->with('error', 'One of the products exceeds available stock.');
             }
 
-            $user->cartItems()->updateOrCreate(
-                ['product_id' => $product->id],
+            $cartItem = CartItem::updateOrCreate(
+                ['user_id' => $user->id, 'product_id' => $product->id],
                 ['quantity' => $product->pivot->quantity]
             );
         }
