@@ -131,7 +131,7 @@
             });
 
             if (selectedItems.length === 0) {
-                alert('Please select at least one item to proceed.');
+                showModal('errorModal', 'Please select at least one item to proceed.');
                 return;
             }
 

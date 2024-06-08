@@ -3,8 +3,10 @@
 @section('content')
     <div class="faq-image">
         <div class="faq-search-bar">
-            <input type="text" id="faqSearchInput" placeholder="Search...">
-            <button type="button" onclick="searchFaq()">Search</button>
+            <form action="{{ route('faq.index') }}" method="GET">
+                <input type="text" name="query" value="{{ $query ?? '' }}" placeholder="Search FAQs">
+                <button type="submit">Search</button>
+            </form>
         </div>
         <img src="../assets/images/faqheader.svg" alt="Image">
     </div>

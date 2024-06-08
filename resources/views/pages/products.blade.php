@@ -103,7 +103,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
     @if (session('success'))
@@ -125,36 +124,30 @@
     @endif
 
     <script>
-        document.getElementById('close-btn').onclick = function() {
-            window.location.href = "{{ route('products.index') }}";
-        };
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeButton = document.getElementById("close-btn");
+            if (closeButton) {
+                closeButton.onclick = function() {
+                    window.location.href = "{{ route('products.index') }}";
+                };
+            }
 
-        document.querySelectorAll('.add-to-cart-form').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                
-                const productId = this.dataset.productId; 
-                const stock = parseInt(this.dataset.productStock); 
-                const quantity = parseInt(this.querySelector('#quantity').value);
-                
-                if (quantity > stock) {
-                    alert('Not enough stock available.');
-                } else {
-                    this.submit();
-                }
+            document.querySelectorAll('.add-to-cart-form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+
+                    const productId = this.dataset.productId; 
+                    const stock = parseInt(this.dataset.productStock); 
+                    const quantity = parseInt(this.querySelector('#quantity').value);
+
+                    if (quantity > stock) {
+                        alert('Not enough stock available.');
+                    } else {
+                        this.submit();
+                    }
+                });
             });
-        });
 
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            button.addEventListener('click', function(event) {
-                // Check if user is logged in
-                if (!auth()->check()) {
-                    event.preventDefault(); // Prevent default action (e.g., form submission)
-                    alert('Please login to add items to your cart.');
-                    window.location.href = '{{ route("user.login") }}'; 
-                }
-            });
         });
-
     </script>
 @endsection

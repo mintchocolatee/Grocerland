@@ -72,20 +72,6 @@
             });
         });
 
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            button.addEventListener('click', function(event) {
-                // Check if user is logged in
-                if (!isLoggedIn()) {
-                    event.preventDefault(); // Prevent default action (e.g., form submission)
-                    alert('Please login to add items to your cart.');
-                    window.location.href = '{{ route("user.login") }}'; 
-                }
-            });
-        });
-
-        // Function to check if user is logged in
-        function isLoggedIn() {
-            return {{ auth()->check() ? 'true' : 'false' }};
-        }
+        
     </script>
 @endsection
