@@ -34,7 +34,28 @@
                 <button type="submit" class="add-to-cart-button">Add to Cart</button>
             </form>
         </div>
+    @if (session('success'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Success!</h2>
+                <p>{{ Session::get('success') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @elseif (session('error'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Fail to add!</h2>
+                <p>{{ Session::get('error') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @endif
+
     <script>
+        document.getElementById('close-btn').onclick = function() {
+            window.location.href = "{{ route('products.index') }}";
+        };
         document.querySelectorAll('.add-to-cart-form').forEach(form => {
             form.addEventListener('submit', function(event) {
                 event.preventDefault(); 
@@ -51,20 +72,6 @@
             });
         });
 
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            button.addEventListener('click', function(event) {
-                // Check if user is logged in
-                if (!isLoggedIn()) {
-                    event.preventDefault(); // Prevent default action (e.g., form submission)
-                    alert('Please login to add items to your cart.');
-                    window.location.href = '{{ route("user.login") }}'; 
-                }
-            });
-        });
-
-        // Function to check if user is logged in
-        function isLoggedIn() {
-            return {{ auth()->check() ? 'true' : 'false' }};
-        }
+        
     </script>
 @endsection

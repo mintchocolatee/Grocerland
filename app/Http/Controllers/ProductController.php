@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         
-        $categoryId = $request->input('category'); // Get the selected category ID from the request
+        $categoryId = $request->input('category'); 
         
         $productsQuery = Product::query();
         
@@ -24,8 +24,8 @@ class ProductController extends Controller
             $productsQuery->where('category_id', $categoryId);
         }
         
-        // Apply sorting based on the selected sort option
-        $sort_by = $request->input('sort_by');
+        // Apply sorting based on the selected sort option or default to 'date_desc'
+        $sort_by = $request->input('sort_by', 'date_desc');
         if ($sort_by === 'name_asc') {
             $productsQuery->orderBy('name', 'asc');
         } elseif ($sort_by === 'name_desc') {
@@ -43,8 +43,12 @@ class ProductController extends Controller
         // Apply price range filtering if provided
         $price_from = $request->input('price_from');
         $price_to = $request->input('price_to');
-        if ($price_from && $price_to) {
+        if ($price_from !== null && $price_to !== null) {
             $productsQuery->whereBetween('price', [$price_from, $price_to]);
+        } elseif ($price_from !== null) {
+            $productsQuery->where('price', '>=', $price_from);
+        } elseif ($price_to !== null) {
+            $productsQuery->where('price', '<=', $price_to);
         }
 
         $productsQuery->where('stock', '>', 0);
@@ -54,6 +58,7 @@ class ProductController extends Controller
         
         return view('pages.products', compact('products', 'categories'));
     }
+
 
     public function create()
     {

@@ -36,8 +36,16 @@
             </div>
         @endif
     </div>
+    <div class="modal-overlay" id="errorModal" style="display:none;">
+        <div class="modal-content">
+            <h2>Error</h2>
+            <p id="errorMessage"></p>
+            <button id="closeErrorModal">Close</button>
+        </div>
+    </div>
 
     <script>
+
         function updateQuantity(cartItemId, delta) {
             const cartItemElement = document.querySelector(`.cart-item[data-cart-item-id='${cartItemId}']`);
             const quantityInput = cartItemElement.querySelector('input[name="quantity"]');
@@ -60,10 +68,24 @@
                         quantityInput.value = newQuantity;
                         updateTotalAmount();
                     } else {
-                        alert(data.message);
+                        showModal('errorModal', data.message);
                     }
                 });
         }
+
+        function showModal(modalId, message) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            if (modalId === 'successModal') {
+                document.getElementById('successMessage').innerText = message;
+            } else if (modalId === 'errorModal') {
+                document.getElementById('errorMessage').innerText = message;
+            }
+        }
+
+        document.getElementById('closeErrorModal').onclick = function() {
+            document.getElementById('errorModal').style.display = 'none';
+        };
 
         function removeItem(cartItemId) {
             fetch(`{{ url('cart/remove') }}/${cartItemId}`, {
@@ -109,7 +131,7 @@
             });
 
             if (selectedItems.length === 0) {
-                alert('Please select at least one item to proceed.');
+                showModal('errorModal', 'Please select at least one item to proceed.');
                 return;
             }
 

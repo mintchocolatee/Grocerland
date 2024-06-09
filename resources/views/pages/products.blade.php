@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="{{ route('products.index') }}">All</a></li>
                 @foreach($categories as $category)
-                    <li><a href="{{ route('products.index', ['category' => $category->id]) }}">{{ $category->name }}</a></li>
+                    <li><a href="{{ route('products.index', array_merge(request()->query(), ['category' => $category->id])) }}">{{ $category->name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -71,10 +71,10 @@
 
                                 @if(auth()->user() && auth()->user()->role === 'admin')
                                     <a href="{{ route('products.edit', $product->id) }}" class="edit-button">Edit product</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                        <button type="button" class="delete-button" data-product-name="{{ $product->name }}">Delete</button>
                                     </form>
                                 @endif
                             </div>
@@ -86,7 +86,7 @@
                 <div class="productPageIndicator">
                     <div class="prevButtonContainer">
                         @if(!$products->onFirstPage())
-                        <a href="{{ $products->previousPageUrl() }}">
+                        <a href="{{ $products->appends(request()->query())->previousPageUrl() }}">
                             <button class="prevButton"><</button>
                         </a>
                         @endif
@@ -96,56 +96,99 @@
                     </div>
                     <div class="nextButtonContainer">
                         @if($products->hasMorePages())
-                        <a href="{{ $products->nextPageUrl() }}">
+                        <a href="{{ $products->appends(request()->query())->nextPageUrl() }}">
                             <button class="nextButton">></button>
                         </a>
                         @endif
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
+
+    <!-- Success and Error Modals -->
+    @if (session('success'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Success!</h2>
+                <p>{{ Session::get('success') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @elseif (session('error'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Fail to add!</h2>
+                <p>{{ Session::get('error') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
+    @endif
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete this product?</p>
+            <p id="product-name"></p>
+            <button id="confirm-delete-btn">Delete</button>
+            <button id="cancel-delete-btn">Cancel</button>
+        </div>
+    </div>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            @if(session('success'))
-                alert("{{ session('success') }}");
-            @endif
-            @if(session('error'))
-                alert("{{ session('error') }}");
-            @endif
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle success/error modals
+            const closeButton = document.getElementById("close-btn");
+            if (closeButton) {
+                closeButton.onclick = function() {
+                    window.location.href = "{{ route('products.index') }}";
+                };
+            }
 
-        document.querySelectorAll('.add-to-cart-form').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                
-                const productId = this.dataset.productId; 
-                const stock = parseInt(this.dataset.productStock); 
-                const quantity = parseInt(this.querySelector('#quantity').value);
-                
-                if (quantity > stock) {
-                    alert('Not enough stock available.');
-                } else {
-                    this.submit();
-                }
+            // Handle delete confirmation modal
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            const deleteModal = document.getElementById('delete-modal');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const productNameElement = document.getElementById('product-name');
+
+            let currentForm;
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentForm = this.closest('form');
+                    const productName = this.dataset.productName;
+                    productNameElement.textContent = productName;
+                    deleteModal.style.display = 'flex';
+                });
+            });
+
+            confirmDeleteBtn.addEventListener('click', function() {
+                currentForm.submit();
+            });
+
+            cancelDeleteBtn.addEventListener('click', function() {
+                deleteModal.style.display = 'none';
+                currentForm = null;
+            });
+
+            // Handle add-to-cart forms
+            document.querySelectorAll('.add-to-cart-form').forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+
+                    const productId = this.dataset.productId; 
+                    const stock = parseInt(this.dataset.productStock); 
+                    const quantity = parseInt(this.querySelector('#quantity').value);
+
+                    if (quantity > stock) {
+                        alert('Not enough stock available.');
+                    } else {
+                        this.submit();
+                    }
+                });
             });
         });
-
-        document.querySelectorAll('.add-to-cart-button').forEach(button => {
-            button.addEventListener('click', function(event) {
-                // Check if user is logged in
-                if (!isLoggedIn()) {
-                    event.preventDefault(); // Prevent default action (e.g., form submission)
-                    alert('Please login to add items to your cart.');
-                    window.location.href = '{{ route("user.login") }}'; 
-                }
-            });
-        });
-
-        // Function to check if user is logged in
-        function isLoggedIn() {
-            return {{ auth()->check() ? 'true' : 'false' }};
-        }
     </script>
 @endsection

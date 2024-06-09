@@ -10,11 +10,21 @@ class FaqController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $faqs = Faq::all();
-        return view('pages.faq', compact('faqs'));
+        $query = $request->input('query');
+
+        if ($query) {
+            $faqs = Faq::where('big_title', 'like', '%' . $query . '%')
+                ->orWhere('subquestions_answers', 'like', '%' . $query . '%')
+                ->get();
+        } else {
+            $faqs = Faq::all();
+        }
+
+        return view('pages.faq', compact('faqs', 'query'));
     }
+
 
     /**
      * Show the form for creating a new resource.
