@@ -42,8 +42,6 @@ Route::post('/orders/reorder/{orderId}', [OrderController::class, 'reorder'])->n
 // Checkout CRUD routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-// Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-// Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 // FAQ CRUD routes
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');

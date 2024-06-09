@@ -71,10 +71,10 @@
 
                                 @if(auth()->user() && auth()->user()->role === 'admin')
                                     <a href="{{ route('products.edit', $product->id) }}" class="edit-button">Edit product</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display: inline-block;">
+                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="delete-form">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                        <button type="button" class="delete-button" data-product-name="{{ $product->name }}">Delete</button>
                                     </form>
                                 @endif
                             </div>
@@ -105,6 +105,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Success and Error Modals -->
     @if (session('success'))
         <div class="modal-overlay">
             <div class="modal-content">
@@ -123,8 +125,20 @@
         </div>
     @endif
 
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <h2>Confirm Delete</h2>
+            <p>Are you sure you want to delete this product?</p>
+            <p id="product-name"></p>
+            <button id="confirm-delete-btn">Delete</button>
+            <button id="cancel-delete-btn">Cancel</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Handle success/error modals
             const closeButton = document.getElementById("close-btn");
             if (closeButton) {
                 closeButton.onclick = function() {
@@ -132,6 +146,34 @@
                 };
             }
 
+            // Handle delete confirmation modal
+            const deleteButtons = document.querySelectorAll('.delete-button');
+            const deleteModal = document.getElementById('delete-modal');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const productNameElement = document.getElementById('product-name');
+
+            let currentForm;
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    currentForm = this.closest('form');
+                    const productName = this.dataset.productName;
+                    productNameElement.textContent = productName;
+                    deleteModal.style.display = 'flex';
+                });
+            });
+
+            confirmDeleteBtn.addEventListener('click', function() {
+                currentForm.submit();
+            });
+
+            cancelDeleteBtn.addEventListener('click', function() {
+                deleteModal.style.display = 'none';
+                currentForm = null;
+            });
+
+            // Handle add-to-cart forms
             document.querySelectorAll('.add-to-cart-form').forEach(form => {
                 form.addEventListener('submit', function(event) {
                     event.preventDefault(); 
@@ -147,7 +189,6 @@
                     }
                 });
             });
-
         });
     </script>
 @endsection
