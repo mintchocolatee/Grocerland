@@ -40,7 +40,7 @@
                                 alt="{{ $cartItem->product->name }}">
                             <div class="checkout-item-details">
                                 <h2>{{ $cartItem->product->name }}</h2>
-                                <p>Price: ${{ $cartItem->product->price }}</p>
+                                <p>Price: RM{{ $cartItem->product->price }}</p>
                                 <p>Quantity: {{ $cartItem->quantity }}</p>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                     <input type="hidden" name="selected_items[]" value="{{ $cartItem->id }}">
                 @endforeach
                 <div class="total-price">
-                    <h2>Total Price: ${{ number_format($totalPrice, 2) }}</h2>
+                    <h2>Total Price: RM{{ number_format($totalPrice, 2) }}</h2>
                 </div>
                 <div class="pay-button-container">
                     <button type="submit" class="checkout-button">Confirm and Pay</button>

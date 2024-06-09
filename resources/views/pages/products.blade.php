@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="{{ route('products.index') }}">All</a></li>
                 @foreach($categories as $category)
-                    <li><a href="{{ route('products.index', ['category' => $category->id]) }}">{{ $category->name }}</a></li>
+                    <li><a href="{{ route('products.index', array_merge(request()->query(), ['category' => $category->id])) }}">{{ $category->name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -86,7 +86,7 @@
                 <div class="productPageIndicator">
                     <div class="prevButtonContainer">
                         @if(!$products->onFirstPage())
-                        <a href="{{ $products->previousPageUrl() }}">
+                        <a href="{{ $products->appends(request()->query())->previousPageUrl() }}">
                             <button class="prevButton"><</button>
                         </a>
                         @endif
@@ -96,7 +96,7 @@
                     </div>
                     <div class="nextButtonContainer">
                         @if($products->hasMorePages())
-                        <a href="{{ $products->nextPageUrl() }}">
+                        <a href="{{ $products->appends(request()->query())->nextPageUrl() }}">
                             <button class="nextButton">></button>
                         </a>
                         @endif

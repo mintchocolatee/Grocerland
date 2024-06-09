@@ -24,14 +24,14 @@
                                 @foreach ($order->products as $product)
                                     <li>
                                         {{ $product->name }} - {{ $product->pivot->quantity }} x
-                                        ${{ $product->pivot->price }}
+                                        RM{{ $product->pivot->price }}
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                         <div class="other-details">
                             <h3>Total Amount : </h3>
-                            <h4>${{ $order->total_amount }}</h4>
+                            <h4>RM{{ $order->total_amount }}</h4>
                             @if(auth()->user() && auth()->user()->role === 'user')
                                 <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
                                     @csrf
