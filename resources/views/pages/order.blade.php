@@ -30,9 +30,9 @@
                             </ul>
                         </div>
                         <div class="other-details">
-                            <h3>Total Amount : </h3>
+                            <h3>Total Amount</h3>
                             <h4>RM{{ $order->total_amount }}</h4>
-                            @if(auth()->user() && auth()->user()->role === 'user')
+                            @if (auth()->user() && auth()->user()->role === 'user')
                                 <form action="{{ route('orders.reorder', $order->id) }}" method="POST">
                                     @csrf
                                     <div class="button-details">

@@ -1,5 +1,5 @@
 .add-product-container {
-    background-image: url('../assets/images/addProductBackground2.png');
+    background-image: url("../assets/images/addProductBackground2.png");
     background-size: cover;
     background-position: center;
     display: flex;
@@ -17,34 +17,35 @@
     width: 950px;
     margin-bottom: 40px;
     margin-top: 30px;
-    height:auto;
+    height: auto;
     display: flex;
-    flex-direction:row; 
+    flex-direction: row;
 }
 
-.imageUploadContainer{
+.imageUploadContainer {
     padding-left: 50px;
     padding-right: 50px;
     padding-bottom: 50px;
     padding-top: 37px;
 }
 
-#uploaded-text{
+#uploaded-text {
     font-weight: bolder;
     font-size: x-large;
     color: #802e0b;
     padding-left: 42px;
-    font-family: 'poppins-bolder';
+    font-family: "poppins-bolder";
 }
 
-#previewImage ,#placeholderImage{
+#previewImage,
+#placeholderImage {
     margin-top: 30px;
     width: 300px;
     height: 390px;
 }
 
 .add-product-form {
-    background-color: #D5EDC6;
+    background-color: #d5edc6;
     border-radius: 20px;
     padding: 25px;
     width: 100%;
@@ -63,7 +64,7 @@
     width: 100%;
     margin-bottom: 15px;
     font-weight: 550;
-    font-family: 'poppins-bolder';
+    font-family: "poppins-bolder";
 }
 
 .add-product-form input,
@@ -71,7 +72,7 @@
 .add-product-form select {
     padding: 9px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 14px;
     box-sizing: border-box;
 }
@@ -83,17 +84,28 @@
     outline: none;
 }
 
+.add-product-form-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .add-product-form button {
-    background-color: #206323;
+    padding: 10px 20px; /* Ensure the padding is consistent */
+
     color: white;
+    background-color: #afda02;
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    font-weight: bold;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 .add-product-form button:hover {
-    background-color: #45a049;
+    background-color: white;
+    color: #afda02;
 }
 
 .error {
@@ -103,13 +115,13 @@
     margin-bottom: 10px;
 }
 
-#productDescription{
-    width: 100%; 
+#productDescription {
+    width: 100%;
     height: 80px;
-    resize: none; 
+    resize: none;
 }
 
 @font-face {
-    font-family: 'poppins-bolder';
-    src: url('../assets/fonts/Poppins-Light.ttf') format('truetype');
+    font-family: "poppins-bolder";
+    src: url("../assets/fonts/Poppins-Light.ttf") format("truetype");
 }

@@ -35,7 +35,7 @@
 }
 
 .category-container ul li a:hover {
-    color: #9dc10d;
+    color: #afda02;
     font-weight: 1200;
     font-size: large;
 }
@@ -55,8 +55,8 @@
 }
 
 .title-button-container {
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
 }
 
 .title-button-container h1 {
@@ -76,7 +76,7 @@
 .sort-filter-form {
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
     padding-top: 12px;
     padding-bottom: 19px;
 }
@@ -90,9 +90,9 @@
 .sort-filter-form select,
 .sort-filter-form input[type="number"],
 .sort-filter-form button {
-    padding: 5px 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .sort-filter-form select:focus,
@@ -112,9 +112,9 @@
 
 .sort-filter-form button {
     margin-left: 44px;
-    background-color: #728c08; 
-    color: #fff; 
-    border-color: #728c08; 
+    background-color: #afda02;
+    color: white;
+    border-color: #afda02;
     cursor: pointer;
     padding-left: 10px;
     padding-right: 10px;
@@ -123,12 +123,12 @@
     padding-bottom: 5.2px;
     margin-top: 3.7px;
     font-weight: 700;
-    font-family: 'poppins';
+    font-family: "poppins";
 }
 
 .sort-filter-form button:hover {
-    background-color: #9dc10d; 
-    border-color: #9dc10d; 
+    background-color: #9dc10d;
+    border-color: #9dc10d;
 }
 
 /* Products Grid Styles */
@@ -190,7 +190,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .product-card-body .card-title {
@@ -201,15 +201,15 @@
     font-weight: 700;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 3em; 
-    line-height: 1.5em; 
+    max-height: 3em;
+    line-height: 1.5em;
     text-decoration: none;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.card-title:hover{
-    color:#de7b50;
+.card-title:hover {
+    color: #de7b50;
     font-weight: 1100;
     text-decoration: underline;
 }
@@ -221,9 +221,9 @@
 
 .product-card-body #quantity {
     width: 65px;
-    padding: 5px 10px; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .product-card-body #quantity:focus {
@@ -231,9 +231,10 @@
     outline: none;
 }
 
-.product-card-body .add-to-cart-button, .delete-button {
+.product-card-body .add-to-cart-button,
+.delete-button {
     margin-top: 3px;
-    background-color: #de7b50;
+    background-color: #f9a174;
     color: white;
     font-weight: 700;
     padding-left: 10px;
@@ -241,25 +242,26 @@
     padding-top: 8.8px;
     padding-bottom: 8.8px;
     border: #de7b50;
-    width:180px;
+    width: 180px;
     font-size: 0.85rem;
+    cursor: pointer;
 }
 
 .product-card-body .add-to-cart-button:hover,
 .delete-button:hover {
-    background-color: #a13c10;
+    background-color: #de7b50;
     border: #a13c10;
     font-size: 0.95rem;
 }
 
-.edit-button{
+.edit-button {
     color: #000000;
     font-weight: 700;
     text-decoration: none;
     font-size: 0.95em;
 }
 
-.edit-button:hover{
+.edit-button:hover {
     color: #de7b50;
     font-weight: 1100;
     text-decoration: underline;
@@ -275,7 +277,7 @@ form {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    gap: 3px; 
+    gap: 3px;
 }
 
 .prevButtonContainer,
@@ -304,7 +306,6 @@ form {
     font-size: 1em;
 }
 
-
 /* Product details */
 .product-details {
     width: 75%;
@@ -313,6 +314,6 @@ form {
 }
 
 @font-face {
-    font-family: 'poppins';
-    src: url('../assets/fonts/Poppins-ExtraLight.ttf') format('truetype');
+    font-family: "poppins";
+    src: url("../assets/fonts/Poppins-ExtraLight.ttf") format("truetype");
 }

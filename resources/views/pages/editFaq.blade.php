@@ -1,29 +1,33 @@
 @extends('components.layout')
 
 @section('content')
-    <div class="add-faq-container">
-        <form action="{{ route('faq.update', $faq->id) }}" method="POST" id="faq-form">
-            @csrf
-            @method('PUT')
-            <label for="big_title" id="question-text">Title</label><br>
-            <input type="text" id="question" name="big_title" value="{{ $faq->big_title }}" class="form-control">
-    
-            <div id="subquestions-container">
-                @foreach($faq->subquestions_answers as $index => $subquestion_answer)
-                <div class="subquestion">
-                    <input type="text" name="subquestions[]" value="{{ $subquestion_answer['subquestion'] }}" placeholder="Subquestion" class="form-control">
-                    <input type="text" name="answers[]" value="{{ $subquestion_answer['answer'] }}" placeholder="Answer" class="form-control">
+    <div class="add-faq-pages">
+        <div class="add-faq-container">
+            <form action="{{ route('faq.update', $faq->id) }}" method="POST" id="faq-form">
+                @csrf
+                @method('PUT')
+                <label for="big_title" id="question-text">Edit FAQ</label><br>
+                <input type="text" id="question" name="big_title" value="{{ $faq->big_title }}" placeholder="Title"
+                    class="form-control"><br>
+                <button type="button" id="add-subquestion">Add Subquestion</button><br>
+                <div id="subquestions-container">
+                    @foreach ($faq->subquestions_answers as $index => $subquestion_answer)
+                        <div class="subquestion">
+                            <input type="text" name="subquestions[]" value="{{ $subquestion_answer['subquestion'] }}"
+                                placeholder="Subquestion" class="form-control">
+                            <input type="text" name="answers[]" value="{{ $subquestion_answer['answer'] }}"
+                                placeholder="Answer" class="form-control">
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
 
-            <button type="button" id="add-subquestion">Add Subquestion</button><br>
-            <button type="submit" id="faq-submit" class="btn btn-primary">Update FAQ</button>
-        </form>
+                <button type="submit" id="faq-submit" class="btn btn-primary">Update FAQ</button>
+            </form>
+        </div>
     </div>
 
     <script>
-        document.getElementById('add-subquestion').addEventListener('click', function () {
+        document.getElementById('add-subquestion').addEventListener('click', function() {
             const container = document.getElementById('subquestions-container');
             const subquestion = document.createElement('div');
             subquestion.classList.add('subquestion');
@@ -39,13 +43,13 @@
             container.appendChild(subquestion);
         });
 
-        document.addEventListener('click', function (e) {
+        document.addEventListener('click', function(e) {
             if (e.target && e.target.closest('.remove-subquestion')) {
                 e.target.closest('.subquestion').remove();
             }
         });
 
-        document.getElementById('faq-form').addEventListener('submit', function (e) {
+        document.getElementById('faq-form').addEventListener('submit', function(e) {
             const subquestions = document.querySelectorAll('input[name="subquestions[]"]');
             const answers = document.querySelectorAll('input[name="answers[]"]');
             let valid = true;

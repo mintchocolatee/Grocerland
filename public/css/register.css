@@ -26,7 +26,7 @@ body {
     font-size: 2.5rem;
     margin-bottom: 20px;
     color: #333;
-    font-family: 'poppins-bolder';
+    font-family: "poppins-bolder";
 }
 
 .register-form {
@@ -86,6 +86,6 @@ input:-webkit-autofill:qwfocus {
 }
 
 @font-face {
-    font-family: 'poppins-bolder';
-    src: url('../assets/fonts/Poppins-Light.ttf') format('truetype');
+    font-family: "poppins-bolder";
+    src: url("../assets/fonts/Poppins-Light.ttf") format("truetype");
 }
