@@ -31,11 +31,19 @@
                 <button id="close-btn">Close</button>
             </div>
         </div>
+    @elseif(Session::has('error'))
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <h2>Fail!</h2>
+                <p>{{ Session::get('error') }}</p>
+                <button id="close-btn">Close</button>
+            </div>
+        </div>
     @endif
 
     <script>
         document.getElementById('close-btn').onclick = function() {
-            window.location.href = "{{ route('user.login') }}";
+            window.location.href = "{{ route('user.register') }}";
         };
     </script>
 @endsection

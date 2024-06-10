@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -31,30 +30,43 @@ class UserController extends Controller
 
     public function handleRegister(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->email_verification_token = Str::random(60);
-        $user->save();
-
-        // Mail::send('pages.email.verify', ['token' => $user->email_verification_token], function ($message) use ($request) {
-        //     $message->to($request->email);
-        //     $message->subject('Verify Email Address');
-        // });
-
-        // // Store a message in the session
-        // Session::flash('verification_message', 'We have emailed your verification link!');
-        Session::flash('success_message', 'Your account has been register successfully.');
-
-        // Redirect to login page
-        return redirect()->route('user.register');
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
+    
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->email_verification_token = Str::random(60);
+            $user->save();
+    
+            // Uncomment if you want to send an email verification link
+            // Mail::send('pages.email.verify', ['token' => $user->email_verification_token], function ($message) use ($request) {
+            //     $message->to($request->email);
+            //     $message->subject('Verify Email Address');
+            // });
+    
+            // Store a success message in the session
+            Session::flash('success_message', 'Your account has been registered successfully.');
+    
+            // Redirect to the registration page
+            return redirect()->route('user.register');
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Check if the email validation failed
+            if ($e->validator->errors()->has('email')) {
+                Session::flash('error', 'The email has already been taken.');
+            } else {
+                Session::flash('error', 'There was an error with your registration. Please try again.');
+            }
+    
+            // Redirect back with input
+            return redirect()->route('user.register')->withErrors($e->validator)->withInput();
+        }
     }
 
     // public function verifyEmail($token)
